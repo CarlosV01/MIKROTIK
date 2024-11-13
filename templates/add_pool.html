@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Agregar Pool de Direcciones</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Administración de Red</h2>
+        <ul>
+            <a href="/"><i class="fa fa-home"></i> Inicio</a>
+            <a href="/dhcp_server"><i class="fa fa-server"></i> Servidores DHCP</a>
+            <a href="/add_pool"><i class="fa fa-plus"></i> Agregar Pool de Direcciones</a>
+            <!-- Agrega más enlaces según necesites -->
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Agregar nuevo Pool de Direcciones</h1>
+        <form action="/add_pool" method="POST">
+            <div>
+                <label for="name">Nombre del Pool:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="range_start">Rango de inicio:</label>
+                <input type="text" id="range_start" name="range_start" placeholder="192.168.1.10" required>
+            </div>
+            <div>
+                <label for="range_end">Rango de fin:</label>
+                <input type="text" id="range_end" name="range_end" placeholder="192.168.1.100" required>
+            </div>
+            <button type="submit" class="submit-btn">Agregar Pool</button>
+        </form>
+    </div>
+</body>
+</html>

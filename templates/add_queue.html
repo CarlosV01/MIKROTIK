@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Asegúrate de que esta ruta coincida con la ubicación real del CSS -->
+    <title>Agregar Nueva Cola</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Panel de Administración</h3>
+        <a href="/"><i class="fa fa-home"></i> Inicio</a>
+        <a href="/queues"><i class="fa fa-tachometer-alt"></i> Ancho de Banda</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Agregar Nueva Cola</h1>
+        <form action="/add_queue" method="POST">
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="target">Destino:</label>
+                <input type="text" id="target" name="target" required>
+            </div>
+            <div class="form-group">
+                <label for="upload_limit">Límite de Carga:</label>
+                <input type="text" id="upload_limit" name="upload_limit" required placeholder="Ej: 5M" pattern="^\d+(M|G)?$" title="Introduce un número seguido de M (Mega) o G (Giga)">
+            </div>
+            <div class="form-group">
+                <label for="download_limit">Límite de Descarga:</label>
+                <input type="text" id="download_limit" name="download_limit" required placeholder="Ej: 10M" pattern="^\d+(M|G|K)?$" title="Introduce un número seguido de M (Mega) o G (Giga)">
+            </div>
+            <button type="submit" class="btn">Agregar Cola</button>
+        </form>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Para los íconos -->
+</body>
+</html>

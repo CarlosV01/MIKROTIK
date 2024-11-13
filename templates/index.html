@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Los Othitos</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Opciones</h3>
+        <a href="/"><i class="fa fa-home"></i> Inicio</a>
+        <a href="/add_ip"><i class="fa fa-plus"></i> Agregar IP</a>
+        <a href="/dhcp_server"><i class="fa fa-server"></i> Servidores DHCP</a>
+        <a href="/firewall_rules"><i class="fa fa-fire"></i> Reglas de Firewall</a>
+        <a href="/queues"><i class="fa fa-tachometer-alt"></i> Ancho de Banda</a>
+        <a href="/logout" class="logout-btn"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
+    </div>
+    <div class="main-content">
+        <h1>Proyecto Los Othitos</h1>
+        <h2>Redes Actuales</h2>
+        <div class="cards-container">
+            {% if ip_addresses %}
+                {% for ip in ip_addresses %}
+                <div class="ip-card">
+                    <h3>Dirección IP: {{ ip.address }}</h3>
+                    <p><strong>Interfaz:</strong> {{ ip.interface }}</p>
+                    <form action="{{ url_for('management_ip.delete_ip', ip_id=ip['.id']) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta dirección IP?');">
+                        <button type="submit" class="delete-button">Eliminar</button>
+                    </form>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="ip-card">
+                    <h3>No hay direcciones IP registradas.</h3>
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+</body>
+</html>

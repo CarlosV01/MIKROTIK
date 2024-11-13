@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidores DHCP</title>
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Enlace al CSS principal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Administración de Red</h2>
+        <ul>
+            <a href="/"><i class="fa fa-home"></i> Inicio</a>
+            <a href="/dhcp_server"><i class="fa fa-server"></i> Servidores DHCP</a>
+            <a href="/add_dhcp_server"><i class="fa fa-plus"></i> Agregar Servidor DHCP</a>
+            <!-- Agrega más enlaces según necesites -->
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Servidores DHCP</h1>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Interfaz</th>
+                    <th>Tiempo de Lease</th>
+                    <th>Pool de Direcciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for server in dhcp_servers %}
+                <tr>
+                    <td>{{ server['name'] }}</td>
+                    <td>{{ server['interface'] }}</td>
+                    <td>{{ server['lease-time'] }}</td>
+                    <td>{{ server['address-pool'] }}</td>
+                    <td>
+                        <!-- Botón para eliminar -->
+                        <form action="/delete_dhcp/{{ server['.id'] }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este servidor DHCP?');">
+                            <button type="submit" class="delete-button">Eliminar</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

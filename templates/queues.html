@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Anchos de Banda</title>
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Asegúrate de que esta ruta coincida con la ubicación real del CSS -->
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Admin Panel</h3>
+        <a href="/"><i class="fa fa-home"></i> Inicio</a>
+        <a href="/queues"><i class="fa fa-tachometer-alt"></i> Ancho de Banda</a>
+        <a href="/add_queue"><i class="fa fa-plus"></i> Agregar Nuevo Queue</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Manage Queues</h1>
+
+        <!-- Tabla para mostrar las colas -->
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Target</th>
+                    <th>Límite de carga</th>
+                    <th>Límite de descarga</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for queue in queues %}
+                <tr>
+                    <td>{{ queue['name'] }}</td>
+                    <td>{{ queue['target'] }}</td>
+                    <td>{{ queue['upload_max_limit'] }}</td>  <!-- Mostrar el límite de carga -->
+                    <td>{{ queue['download_max_limit'] }}</td>  <!-- Mostrar el límite de descarga -->
+                    <td>
+                        <form action="/delete_queue/{{ queue['.id'] }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este Queue?');">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Para los íconos -->
+</body>
+</html>

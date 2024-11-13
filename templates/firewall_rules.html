@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Reglas de Firewall</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Administración de Red</h2>
+        <ul>
+            <a href="/"><i class="fa fa-home"></i> Inicio</a>
+            <a href="/firewall_rules"><i class="fa fa-fire"></i> Reglas de Firewall</a>
+            <a href="/add_firewall_rule"><i class="fa fa-plus"></i> Agregar Regla de Firewall</a>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Reglas de Firewall</h1>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Cadena</th>
+                    <th>Acción</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Protocolo</th>
+                    <th>Puerto</th>
+                    <th>Acción</th> <!-- Nueva columna para acción -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for rule in firewall_rules %}
+                <tr>
+                    <td>{{ rule.chain }}</td>
+                    <td>{{ rule.action }}</td>
+                    <td>{{ rule['src-address'] or 'N/A' }}</td>  <!-- Cambia a 'src-address' -->
+                    <td>{{ rule['dst-address'] or 'N/A' }}</td>  <!-- Cambia a 'dst-address' -->
+                    <td>{{ rule.protocol }}</td>
+                    <td>{{ rule['dst-port'] or 'N/A' }}</td>  <!-- Cambia a 'dst-port' -->
+                    <td>
+                        <form action="/delete_firewall_rule/{{ rule['.id'] }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta regla de firewall?');">
+                            <button type="submit" class="delete-button">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+                         
+            
+        </table>
+    </div>
+</body>
+</html>

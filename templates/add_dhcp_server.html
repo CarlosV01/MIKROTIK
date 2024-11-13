@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Enlace al CSS principal -->
+    <title>Agregar Servidor DHCP</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Administración de Red</h2>
+        <ul>
+            <a href="/"><i class="fa fa-home"></i> Inicio</a>
+            <a href="/dhcp_server" class="active"><i class="fa fa-server"></i> Servidores DHCP</a>
+            <a href="/add_pool"><i class="fa fa-plus"></i> Agregar Pool de Direcciones</a>
+            <!-- Agrega más enlaces según necesites -->
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Agregar nuevo Servidor DHCP</h1>
+        <form action="/add_dhcp_server" method="POST">
+            <div>
+                <label for="name">Nombre del servidor DHCP:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="interface">Interfaz:</label>
+                <select id="interface" name="interface" required>
+                    {% for interface in interfaces %}
+                    <option value="{{ interface.name }}">{{ interface.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="lease_time">Tiempo de Lease:</label>
+                <select id="lease_time" name="lease_time" required>
+                    <option value="1h">1 Hora</option>
+                    <option value="6h">6 Horas</option>
+                    <option value="12h">12 Horas</option>
+                    <option value="1d">1 Día</option>
+                    <option value="3d">3 Días</option>
+                    <option value="7d">1 Semana</option>
+                    <option value="2w">2 Semanas</option>
+                </select>
+            </div>
+            <div>
+                <label for="pool">Pool de direcciones:</label>
+                <select id="pool" name="pool" required>
+                    {% for pool in pools %}
+                    <option value="{{ pool.name }}">{{ pool.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Agregar</button>
+        </form>
+        
+    </div>
+</body>
+</html>

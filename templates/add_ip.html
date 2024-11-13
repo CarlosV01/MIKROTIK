@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar IP Address</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Opciones</h3>
+        <a href="/"><i class="fa fa-home"></i> Inicio</a>
+    </div>
+    <div class="main-content">
+        <h1>Agregar una nueva IP Address</h1>
+        <div class="card">
+            <form action="/add_ip" method="POST">
+                <div>
+                    <label for="ip_address">Dirección IP:</label>
+                    <input type="text" id="ip_address" name="ip_address" placeholder="Ejemplo: 192.168.1.1" required>
+                </div>
+                <div>
+                    <label for="network">Red:</label>
+                    <input type="text" id="network" name="network" placeholder="Ejemplo: 192.168.1.0" required>
+                </div>
+                <div>
+                    <label for="interface">Interfaz:</label>
+                    <select id="interface" name="interface" required>
+                        {% for interface in interfaces %}
+                        <option value="{{ interface.name }}">{{ interface.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Agregar IP</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
